@@ -50,7 +50,7 @@ describe('web driver io task 3', async () => {
         await machineTypeOption.click();
 
         //Select “Add GPUs“
-        //await $('//md-checkbox[@aria-label="Add GPUs"]').click();
+        await $('//md-checkbox[@aria-label="Add GPUs"]').click();
 
         //GPU type: NVIDIA Tesla V100
         //await $("//md-select-value[@id='select_value_label_504']").click();
@@ -95,6 +95,23 @@ describe('web driver io task 3', async () => {
         const emailEstimateButton = await $("//button[@id='Email Estimate']");
         await emailEstimateButton.waitForClickable();
         await emailEstimateButton.click();
+
+        await browser.pause(1000)
+    });
+
+    it('should open yopmail in a new tab and generate an email', async () => {
+        await browser.newWindow('https://yopmail.com/');
+
+        //Generate a random email.
+        const generateOption = await $("//h3[normalize-space()='Random Email generator']");
+        await generateOption.waitForClickable();
+        await generateOption.click();
+
+        //Copy the email generated in yopmail.com (or any other service).
+        const copyEmail = await $("//span[@class='notmobile'][normalize-space()='Copy to clipboard']");
+        await copyEmail.waitForClickable();
+        await copyEmail.click();
+
 
         await browser.pause(1000)
     });
