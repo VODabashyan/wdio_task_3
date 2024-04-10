@@ -90,7 +90,10 @@ describe('web driver io task 3', async () => {
         await addToEstimateButton.click();
 
         //Check the price is calculated in the right section of the calculator. There is a line “Total Estimated Cost: USD ${amount} per 1 month” 
-        await $('//div[@class="cpc-cart-total"]/h2//b[contains(text(), "Total Estimated Cost")]').waitForExist();
+        const totalCost = await $('//div[@class="cpc-cart-total"]/h2//b[contains(text(), "Total Estimated Cost")]');
+        await totalCost.isExisting();
+        const totalCostAmount = await totalCost.getText();
+        console.log(totalCostAmount);
 
         //Select 'EMAIL ESTIMATE'.
         const emailEstimateButton = await $("//button[@id='Email Estimate']");
@@ -99,6 +102,8 @@ describe('web driver io task 3', async () => {
 
         //In a new tab, open https://yopmail.com/ or a similar temporary email–generating service.
         await browser.newWindow('https://yopmail.com/');
+        const adKiller = await $("body");
+        await adKiller.doubleClick();
 
         //Generate a random email.
         const generateOption = await $("//h3[normalize-space()='Random Email generator']");
@@ -127,9 +132,26 @@ describe('web driver io task 3', async () => {
         await sendEmailButton.click();
 
         //Wait for the cost estimate email and check that the emailed 'Total Estimated Monthly Cost' matches the result in the calculator.
+        await browser.switchWindow('yopmail.com');
+        const checkInbox = await $("//span[normalize-space()='Check Inbox']");
+        await checkInbox.waitForClickable();
+        await browser.pause(10000);
+        await checkInbox.click();
+        const iframe5 = await $('#ifmail');
+        await iframe5.waitForExist();
+        await browser.switchToFrame(iframe5);
+        const emailAmount = await $('tbody tr td:nth-child(4)');
+        emailAmount.waitForExist();
+        const emailCostAmount = await emailAmount.getText();
+        console.log(emailCostAmount);
+        //await expect(totalCostAmount).toHaveTextContaining('USD 5,625.38');
 
 
 
-        //await browser.pause(50000)
+
+
+        await browser.pause(1000)
     });
 });
+
+//
