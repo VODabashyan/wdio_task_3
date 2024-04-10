@@ -144,11 +144,8 @@ describe('web driver io task 3', async () => {
         emailAmount.waitForExist();
         const emailCostAmount = await emailAmount.getText();
         console.log(emailCostAmount);
-        //await expect(totalCostAmount).toHaveTextContaining('USD 5,625.38');
-
-
-
-
+        //await expect(totalCostAmount).toHaveTextContaining(emailCostAmount);
+        console.log(await totalCostAmount.includes(emailCostAmount));
 
         await browser.pause(1000)
     });
