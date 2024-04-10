@@ -1,5 +1,6 @@
 describe('web driver io task 3', async () => {
     beforeEach(async () => {
+        
         await browser.url('https://cloud.google.com/');
     });
 
@@ -50,21 +51,20 @@ describe('web driver io task 3', async () => {
         await machineTypeOption.click();
 
         //Select “Add GPUs“
-        await $('//md-checkbox[@aria-label="Add GPUs"]').click();
+        await $$(".md-container.md-ink-ripple")[2].click();
 
         //GPU type: NVIDIA Tesla V100
-        //await $("//md-select-value[@id='select_value_label_504']").click();
-        //const GpuType = await $("//md-select-value[@id='select_value_label_504']");
-        //await GpuType.waitForClickable();
-        //await GpuType.click();
-        //const GpuTypeOption = await $("//md-option[@id='select_option_585']")
-        //await GpuTypeOption.waitForClickable();
-        //await GpuTypeOption.click();
-
+        await $("#select_510").click();
+        const GpuTypeOption = await $("#select_option_517");
+        await GpuTypeOption.waitForClickable();
+        await GpuTypeOption.click();
 
         //Number of GPUs: 1
+        await $("#select_512").click();
+        const numberOfGpus = await $("#select_option_520");
+        await numberOfGpus.waitForClickable();
+        await numberOfGpus.click();
 
-    
         //Local SSD: 2x375 Gb
         await $("//md-select-value[@id='select_value_label_468']").click();
         const localSsdOption = await $("//md-option[@id='select_option_495']")
@@ -72,8 +72,9 @@ describe('web driver io task 3', async () => {
         await localSsdOption.click();
 
         //Datacenter location: Frankfurt (europe-west3)
+        //I selected Netherlands as NVIDIA Tesla V100 wasn't available for Frankfurt.
         await $("//md-select-value[@id='select_value_label_98']").click();
-        const datacenterLocationOption = await $("//md-option[@id='select_option_268']")
+        const datacenterLocationOption = await $("//md-option[@id='select_option_269']")
         await datacenterLocationOption.waitForClickable();
         await datacenterLocationOption.click();
 
@@ -96,10 +97,7 @@ describe('web driver io task 3', async () => {
         await emailEstimateButton.waitForClickable();
         await emailEstimateButton.click();
 
-        await browser.pause(1000)
-    });
-
-    it('should open yopmail in a new tab and generate an email', async () => {
+        //In a new tab, open https://yopmail.com/ or a similar temporary email–generating service.
         await browser.newWindow('https://yopmail.com/');
 
         //Generate a random email.
@@ -112,8 +110,26 @@ describe('web driver io task 3', async () => {
         await copyEmail.waitForClickable();
         await copyEmail.click();
 
+        //Return to the calculator and enter the above email into the email field.
+        await browser.switchWindow('cloud.google.com/products/calculator-legacy');
+        const iframe3 = await browser.findElements('css selector', 'iframe')
+        await browser.switchToFrame(iframe3[0]);
+        const iframe4 = await browser.findElements('css selector', 'iframe')
+        await browser.switchToFrame(iframe4[0]);
+        const emailField = await $("//input[@id='input_620']");
+        await emailField.waitForClickable();
+        await emailField.click();
+        await browser.keys(['Control', 'v', 'NULL'])
 
-        await browser.pause(1000)
+        //Select 'EMAIL ESTIMATE'.    
+        const sendEmailButton = await $("//button[normalize-space()='Send Email']");
+        await sendEmailButton.waitForClickable();
+        await sendEmailButton.click();
+
+        //Wait for the cost estimate email and check that the emailed 'Total Estimated Monthly Cost' matches the result in the calculator.
+
+
+
+        //await browser.pause(50000)
     });
-
 });
