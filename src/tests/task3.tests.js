@@ -1,7 +1,10 @@
+const HomePage = require('./../po/pages/home.page');
+
+const homePage = new HomePage();
+
 describe('web driver io task 3', async () => {
     beforeEach(async () => {
-        
-        await browser.url('https://cloud.google.com/');
+        await homePage.open();
     });
 
     it('calculating the estimate', async () => {
@@ -150,5 +153,3 @@ describe('web driver io task 3', async () => {
         await browser.pause(1000)
     });
 });
-
-//
