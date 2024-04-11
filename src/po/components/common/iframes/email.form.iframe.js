@@ -1,4 +1,4 @@
-const BaseComponent = require("../base.component");
+const BaseComponent = require("../../base.component");
 
 class EmailFormIframe extends BaseComponent {
     constructor() {

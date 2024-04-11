@@ -18,41 +18,43 @@ describe('web driver io task 3', async () => {
         const iframe2 = await iframes('second').element;
         await iframe2.waitForExist();
         await browser.switchToFrame(iframe2);
-        await $("//md-tab-item[@id='tab-item-1']").click();
-        await $('//input[@id="input_100"]').setValue(4);
+
+        //Number of instances: 4
+        await pages('calculator').numberOfInstancesBar.click();
+        await pages('calculator').numberOfInstancesInput.setValue(4);
 
         //Operating System / Software: Free: Debian, CentOS, CoreOS, Ubuntu, or another User-Provided OS
-        await $('#select_113').click();
-        const operatingSystemOption = await $("#select_option_102")
+        await pages('calculator').operatingSystemBar.click();
+        const operatingSystemOption = await pages('calculator').operatingSystemOption;
         await operatingSystemOption.waitForClickable();
         await operatingSystemOption.click();
 
         //Provisioning model: Regular
-        await $("#select_117").click();
-        const provisioningModelOption = await $("//md-option[@id='select_option_115']")
+        await pages('calculator').provisioningModelBar.click();
+        const provisioningModelOption = await pages('calculator').provisioningModelOption;
         await provisioningModelOption.waitForClickable();
         await provisioningModelOption.click();
 
         //Machine Family: General purpose 
-        await $('#select_123').click();
-        const machineFamilyOption = await $("//md-option[@id='select_option_119']/div")
+        await pages('calculator').machineFamilyBar.click();
+        const machineFamilyOption = await pages('calculator').machineFamilyOption;
         await machineFamilyOption.waitForClickable();
         await machineFamilyOption.click();
 
         //Series: N1
-        await $("//md-select-value[@id='select_value_label_95']").click();
-        const seriesOption = await $("//md-option[@id='select_option_224']")
+        await pages('calculator').seriesBar.click();
+        const seriesOption = await pages('calculator').seriesOption;
         await seriesOption.waitForClickable();
         await seriesOption.click();
 
         //Machine type: n1-standard-8 (vCPUs: 8, RAM: 30 GB)
-        await $("//md-select-value[@id='select_value_label_96']").click();
-        const machineTypeOption = await $("//md-option[@id='select_option_474']")
+        await pages('calculator').machineTypeBar.click();
+        const machineTypeOption = await pages('calculator').machineTypeOption;
         await machineTypeOption.waitForClickable();
         await machineTypeOption.click();
 
         //Select “Add GPUs“
-        await $$(".md-container.md-ink-ripple")[2].click();
+        await pages('calculator').addGpuToggle.click();
 
         //GPU type: NVIDIA Tesla V100
         await $("#select_510").click();
