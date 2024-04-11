@@ -1,10 +1,8 @@
-const HomePage = require('./../po/pages/home.page');
-
-const homePage = new HomePage();
+const { pages } = require("./../po");
 
 describe('web driver io task 3', async () => {
     beforeEach(async () => {
-        await homePage.open();
+        await pages('home').open();
     });
 
     it('calculating the estimate', async () => {
@@ -104,7 +102,7 @@ describe('web driver io task 3', async () => {
         await emailEstimateButton.click();
 
         //In a new tab, open https://yopmail.com/ or a similar temporary email–generating service.
-        await browser.newWindow('https://yopmail.com/');
+        await pages('email').open();
         const adKiller = await $("body");
         await adKiller.doubleClick();
 
@@ -127,7 +125,7 @@ describe('web driver io task 3', async () => {
         const emailField = await $("//input[@id='input_620']");
         await emailField.waitForClickable();
         await emailField.click();
-        await browser.keys(['Control', 'v', 'NULL'])
+        await browser.keys(['Control', 'v', 'NULL']);
 
         //Select 'EMAIL ESTIMATE'.    
         const sendEmailButton = await $("//button[normalize-space()='Send Email']");
