@@ -1,4 +1,4 @@
-const { pages } = require("./../po");
+const { pages, iframes } = require("./../po");
 
 describe('web driver io task 3', async () => {
     beforeEach(async () => {
@@ -10,12 +10,12 @@ describe('web driver io task 3', async () => {
         await $("input[class='qdOxv-fmcmS-wGMbrd']").setValue('Google Cloud Platform Pricing Calculator');
         await browser.keys("\uE007");
 
-        await $("//a[@href='https://cloud.google.com/products/calculator-legacy?hl=es-419']").click();
+        await pages('calculator').open();
 
-        const iframe1 = await $('devsite-iframe iframe');
+        const iframe1 = await iframes('first').element;
         await iframe1.waitForExist();
         await browser.switchToFrame(iframe1);
-        const iframe2 = await $('#myFrame');
+        const iframe2 = await iframes('second').element;
         await iframe2.waitForExist();
         await browser.switchToFrame(iframe2);
         await $("//md-tab-item[@id='tab-item-1']").click();

@@ -12,4 +12,4 @@ function pages(name) {
     return items[name.toLowerCase()];
 }
 
-module.exports = {HomePage, CalculatorPage, EmailPage, pages,}
+module.exports = {HomePage, CalculatorPage, EmailPage, pages}
