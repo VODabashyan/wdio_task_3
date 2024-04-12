@@ -29,6 +29,12 @@ class CalculatorPage extends BasePage {
     get committedUsageBar() { return $("//md-select-value[@id='select_value_label_99']") }
     get committedUsageOption() { return $("//md-option[@id='select_option_138']") }
     get addToEstimateButton() { return $("//form[@name='ComputeEngineForm']//button[@type='button'][normalize-space()='Add to Estimate']") }
+    get totalCost() { return $('//div[@class="cpc-cart-total"]/h2//b[contains(text(), "Total Estimated Cost")]') }
+    get emailEstimateButton() { return $("//button[@id='Email Estimate']") }
+    
+    //email form component
+    get emailField() { return $("//input[@id='input_620']") }
+    get sendEmailButton() { return $("//button[normalize-space()='Send Email']") }
 }   
 
 module.exports = CalculatorPage;

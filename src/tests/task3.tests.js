@@ -93,13 +93,13 @@ describe('web driver io task 3', async () => {
         await addToEstimateButton.click();
 
         //Check the price is calculated in the right section of the calculator. There is a line “Total Estimated Cost: USD ${amount} per 1 month” 
-        const totalCost = await $('//div[@class="cpc-cart-total"]/h2//b[contains(text(), "Total Estimated Cost")]');
+        const totalCost = pages('calculator').totalCost;
         await totalCost.isExisting();
         const totalCostAmount = await totalCost.getText();
         console.log(totalCostAmount);
 
         //Select 'EMAIL ESTIMATE'.
-        const emailEstimateButton = await $("//button[@id='Email Estimate']");
+        const emailEstimateButton = await pages('calculator').emailEstimateButton;
         await emailEstimateButton.waitForClickable();
         await emailEstimateButton.click();
 
@@ -124,13 +124,13 @@ describe('web driver io task 3', async () => {
         await browser.switchToFrame(iframe3[0]);
         const iframe4 = await browser.findElements('css selector', 'iframe')
         await browser.switchToFrame(iframe4[0]);
-        const emailField = await $("//input[@id='input_620']");
+        const emailField = await pages('calculator').emailField;
         await emailField.waitForClickable();
         await emailField.click();
         await browser.keys(['Control', 'v', 'NULL']);
 
         //Select 'EMAIL ESTIMATE'.    
-        const sendEmailButton = await $("//button[normalize-space()='Send Email']");
+        const sendEmailButton = await pages('calculator').sendEmailButton;
         await sendEmailButton.waitForClickable();
         await sendEmailButton.click();
 
