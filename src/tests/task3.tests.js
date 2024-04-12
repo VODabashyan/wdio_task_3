@@ -57,38 +57,38 @@ describe('web driver io task 3', async () => {
         await pages('calculator').addGpuToggle.click();
 
         //GPU type: NVIDIA Tesla V100
-        await $("#select_510").click();
-        const GpuTypeOption = await $("#select_option_517");
+        await pages('calculator').GpuTypeBar.click();
+        const GpuTypeOption = await pages('calculator').GpuTypeOption;
         await GpuTypeOption.waitForClickable();
         await GpuTypeOption.click();
 
         //Number of GPUs: 1
-        await $("#select_512").click();
-        const numberOfGpus = await $("#select_option_520");
+        await pages('calculator').numberOfGpusBar.click();
+        const numberOfGpus = await pages('calculator').numberOfGpusOption;
         await numberOfGpus.waitForClickable();
         await numberOfGpus.click();
 
         //Local SSD: 2x375 Gb
-        await $("//md-select-value[@id='select_value_label_468']").click();
-        const localSsdOption = await $("//md-option[@id='select_option_495']")
+        await pages('calculator').localSsdOBar.click();
+        const localSsdOption = await pages('calculator').localSsdOption;
         await localSsdOption.waitForClickable();
         await localSsdOption.click();
 
         //Datacenter location: Frankfurt (europe-west3)
         //I selected Netherlands as NVIDIA Tesla V100 wasn't available for Frankfurt.
-        await $("//md-select-value[@id='select_value_label_98']").click();
-        const datacenterLocationOption = await $("//md-option[@id='select_option_269']")
+        await pages('calculator').datacenterLocationBar.click();
+        const datacenterLocationOption = await pages('calculator').datacenterLocationOption;
         await datacenterLocationOption.waitForClickable();
         await datacenterLocationOption.click();
 
         //Committed usage: 1 Year
-        await $("//md-select-value[@id='select_value_label_99']").click();
-        const committedUsageOption = await $("//md-option[@id='select_option_138']")
+        await pages('calculator').committedUsageBar.click();
+        const committedUsageOption = await pages('calculator').committedUsageOption;
         await committedUsageOption.waitForClickable();
         await committedUsageOption.click();
 
         //Click 'Add to Estimate'.
-        const addToEstimateButton = await $("//form[@name='ComputeEngineForm']//button[@type='button'][normalize-space()='Add to Estimate']");
+        const addToEstimateButton = await pages('calculator').addToEstimateButton;
         await addToEstimateButton.waitForClickable();
         await addToEstimateButton.click();
 
