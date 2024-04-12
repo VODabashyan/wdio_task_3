@@ -5,7 +5,6 @@ class CalculatorPage extends BasePage {
         super('https://cloud.google.com/products/calculator-legacy?hl=es-419');
     }
 
-    get numberOfInstancesBar() { return $("//md-tab-item[@id='tab-item-1']") }
     get numberOfInstancesInput() { return $('//input[@id="input_100"]') }
     get operatingSystemBar() { return $('#select_113') }
     get operatingSystemOption() { return $("#select_option_102") }
@@ -35,6 +34,9 @@ class CalculatorPage extends BasePage {
     //email form component
     get emailField() { return $("//input[@id='input_620']") }
     get sendEmailButton() { return $("//button[normalize-space()='Send Email']") }
+
+    //Top menu component 
+    get computeEngine() { return $("//md-tab-item[@id='tab-item-1']") }
 }   
 
 module.exports = CalculatorPage;
