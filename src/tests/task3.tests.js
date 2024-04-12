@@ -6,8 +6,8 @@ describe('web driver io task 3', async () => {
     });
 
     it('calculating the estimate', async () => {
-        await $('.YSM5S').click();
-        await $("input[class='qdOxv-fmcmS-wGMbrd']").setValue('Google Cloud Platform Pricing Calculator');
+        await pages('home').searchBar.click();
+        await pages('home').searchBarInput.setValue('Google Cloud Platform Pricing Calculator');
         await browser.keys("\uE007");
 
         await pages('calculator').open();
@@ -109,12 +109,12 @@ describe('web driver io task 3', async () => {
         await adKiller.doubleClick();
 
         //Generate a random email.
-        const generateOption = await $("//h3[normalize-space()='Random Email generator']");
+        const generateOption = await pages('email').generateOption;
         await generateOption.waitForClickable();
         await generateOption.click();
 
         //Copy the email generated in yopmail.com (or any other service).
-        const copyEmail = await $("//span[@class='notmobile'][normalize-space()='Copy to clipboard']");
+        const copyEmail = await pages('email').copyEmail;
         await copyEmail.waitForClickable();
         await copyEmail.click();
 
@@ -136,14 +136,14 @@ describe('web driver io task 3', async () => {
 
         //Wait for the cost estimate email and check that the emailed 'Total Estimated Monthly Cost' matches the result in the calculator.
         await browser.switchWindow('yopmail.com');
-        const checkInbox = await $("//span[normalize-space()='Check Inbox']");
+        const checkInbox = await pages('email').checkInbox;
         await checkInbox.waitForClickable();
         await browser.pause(10000);
         await checkInbox.click();
         const iframe5 = await $('#ifmail');
         await iframe5.waitForExist();
         await browser.switchToFrame(iframe5);
-        const emailAmount = await $('tbody tr td:nth-child(4)');
+        const emailAmount = await pages('email').emailAmount;;
         emailAmount.waitForExist();
         const emailCostAmount = await emailAmount.getText();
         console.log(emailCostAmount);
