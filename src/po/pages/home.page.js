@@ -5,8 +5,7 @@ class HomePage extends BasePage {
         super('https://cloud.google.com/');
     }
 
-    get searchBar() { return $('.YSM5S') }
-    get searchBarInput() { return $("input[class='qdOxv-fmcmS-wGMbrd']") }
+    get iframe1() { return $('devsite-iframe iframe') }
 }
 
 module.exports = HomePage;
